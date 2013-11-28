@@ -52,6 +52,7 @@ analysic = (p) ->
 analysisParagraphs()
 nodeIndex = 0
 titleEl = []
+toptitle= null
 while (node = document.getElementsByTagName('*')[nodeIndex])? 
   # console.log node.easyreading
   if node.className.match(/(title)/) or node.id.match(/(title)/)  or node.tagName.match ///
@@ -65,9 +66,25 @@ while (node = document.getElementsByTagName('*')[nodeIndex])?
     if not targetDiv? or node.easyreading.score > targetDiv.easyreading.score
       targetDiv = node
   nodeIndex++
-console.log targetDiv
+# console.log targetDiv
 
 analysicTitle= (t)->
-  if head = t.tagName.match /H(\d)/
-    if not head.titlescore
-      head.titlescore
+  console.log t
+  t.titleScore= { score: 0 }
+  # if head = t.tagName.match /H(\d)/
+  #   t.titleScore.score += 50 / Number head[1]
+  style = window.getComputedStyle(t)
+  if style['font-weight'] is 'bold' or  style['font-weight'] is 'bolder'
+    t.titleScore.score += 10
+  t.titleScore.score += Number style['font-size'].match(/\d+/)[0]
+
+getTitle= ->
+  if titleEl.length >0
+    analysicTitle node for node in titleEl
+    for calnode in titleEl
+      if not toptitle? or calnode.titleScore.score > toptitle.titleScore.score
+        toptitle = calnode
+getTitle()
+console.log toptitle, targetDiv
+
+
