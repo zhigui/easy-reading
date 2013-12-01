@@ -1,0 +1,34 @@
+
+{
+  "name": "Easy reading",
+  "version": "1.0",
+  "description": "make article , post etc contents on the webpage easy to read.",
+  "background": { "scripts": ["js/background.js"] },
+  "content_scripts": [
+    {
+      "matches": [ "http://*/*", "https://*/*" ],
+      "js": ["js/reader.js"],
+      "css":["css/reader.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons" : {
+    "38" : "images/reader38.png",
+    "128" : "images/reader128.png"  
+  },
+  "page_action": {
+    "default_icon": {                    // 可选
+      "19": "images/reader19.png",           // 可选
+      "38": "images/reader38.png"            // 可选
+    },
+    "default_title": "Esay reading"     // 可选，在工具提示中显示
+    // "default_popup": "popup.html"        // 可选
+  },
+  // "browser_action": {
+  //   "default_title": "Time to current page",
+  //   "default_icon": "clock.png",
+  //   "default_popup": "popup.html"
+  // },
+  "permissions": [ "tabs", "http://*/", "https://*/" ],
+  "manifest_version": 2
+}

@@ -1,4 +1,3 @@
-bodyHtml = document.body.innerHTML;
 targetDiv= null
 toptitle= null
 
@@ -117,5 +116,18 @@ startAnalysic = ->
     nodeIndex++
   # 分析获取标题
   getTitle()
+startAnalysic()
+if targetDiv?
+  chrome.extension.sendRequest(  {}, (response)-> );
+console.log(toptitle,targetDiv)
 
+onRequest= (request, sender, sendResponse)->
+  contains = document.createElement("div");
+  contains.id = "easy-reading"
+  contains.appendChild(toptitle)
+  contains.appendChild(targetDiv)
+  document.body.appendChild(contains);
+  console.log request, sender, sendResponse
+
+chrome.extension.onRequest.addListener onRequest
 
