@@ -16,37 +16,23 @@ analysic = (p) ->
       score : 0
 
     if parentEl.className.match ///(
-        comment|meta|footer|footnote
-      )///
+        combx|comment|disqus|foot|header|menu|meta|nav|rss|shoutbox|sidebar|sponsor
+      )///i
       parentEl.easyreading.score -=50
     else
       if parentEl.className.match ///(
-          (^|\\s)
-          (
-            post | hentry | entry[-]? 
-            (content|text|body)?
-            |article[-]? 
-            (content|text|body)?
-          )
-          (\\s|$)
-        )///
+          article|body|content|entry|hentry|page|pagination|post|text
+        )///i
         parentEl.easyreading.score +=25
 
     if parentEl.id.match ///(
-        comment|meta|footer|footnote
-      )///
+        combx|comment|disqus|foot|header|menu|meta|nav|rss|shoutbox|sidebar|sponsor
+      )///i
       parentEl.easyreading.score -=50
     else
       if parentEl.id.match ///(
-          (^|\\s)
-          (
-            post | hentry | entry[-]? 
-            (content|text|body)?
-            |article[-]? 
-            (content|text|body)?
-          )
-          (\\s|$)
-        )///
+          article|body|content|entry|hentry|page|pagination|post|text
+        )///i
         parentEl.easyreading.score +=25
   if parentEl.innerText.length > 10
     parentEl.easyreading.score++
@@ -103,9 +89,9 @@ startAnalysic = ->
   titleEl = []
   while (node = document.getElementsByTagName('*')[nodeIndex])? 
     # 将可能符合的标题元素提取出来
-    if node.className.match(/(title)/) or node.id.match(/(title)/)  or node.tagName.match ///
+    if node.className.match(/(title)/i) or node.id.match(/(title)/i)  or node.tagName.match ///
         ( H1 | H2 | H3 | H4 | H5 | H6 )
-      ///
+      ///i
       titleEl.push node
 
 

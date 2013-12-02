@@ -24,17 +24,17 @@ analysic = function(p) {
     parentEl.easyreading = {
       score: 0
     };
-    if (parentEl.className.match(/(comment|meta|footer|footnote)/)) {
+    if (parentEl.className.match(/(combx|comment|disqus|foot|header|menu|meta|nav|rss|shoutbox|sidebar|sponsor)/i)) {
       parentEl.easyreading.score -= 50;
     } else {
-      if (parentEl.className.match(/((^|\\s)(post|hentry|entry[-]?(content|text|body)?|article[-]?(content|text|body)?)(\\s|$))/)) {
+      if (parentEl.className.match(/(article|body|content|entry|hentry|page|pagination|post|text)/i)) {
         parentEl.easyreading.score += 25;
       }
     }
-    if (parentEl.id.match(/(comment|meta|footer|footnote)/)) {
+    if (parentEl.id.match(/(combx|comment|disqus|foot|header|menu|meta|nav|rss|shoutbox|sidebar|sponsor)/i)) {
       parentEl.easyreading.score -= 50;
     } else {
-      if (parentEl.id.match(/((^|\\s)(post|hentry|entry[-]?(content|text|body)?|article[-]?(content|text|body)?)(\\s|$))/)) {
+      if (parentEl.id.match(/(article|body|content|entry|hentry|page|pagination|post|text)/i)) {
         parentEl.easyreading.score += 25;
       }
     }
@@ -107,7 +107,7 @@ startAnalysic = function() {
   nodeIndex = 0;
   titleEl = [];
   while ((node = document.getElementsByTagName('*')[nodeIndex]) != null) {
-    if (node.className.match(/(title)/) || node.id.match(/(title)/) || node.tagName.match(/(H1|H2|H3|H4|H5|H6)/)) {
+    if (node.className.match(/(title)/i) || node.id.match(/(title)/i) || node.tagName.match(/(H1|H2|H3|H4|H5|H6)/i)) {
       titleEl.push(node);
     }
     if (node.easyreading != null) {
